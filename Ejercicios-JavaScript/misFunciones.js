@@ -9,6 +9,10 @@
 function convertirUnidades(name, Valor) {
   let metro, pie, pulgada, yarda;
 
+  if (Valor.includes(",")) {
+    Valor = Valor.replace(",", ".");
+  }
+
   console.log(Valor);
   console.log(isNaN(Valor));
 
@@ -41,10 +45,10 @@ function convertirUnidades(name, Valor) {
       pulgada = 36 * yarda;
     }
   }
-  document.getElementById("metro").value = metro;
-  document.getElementById("pie").value = pie;
-  document.getElementById("pulgada").value = pulgada;
-  document.getElementById("yarda").value = yarda;
+  document.getElementById("metro").value = Math.round(metro * 100) / 100;
+  document.getElementById("pie").value = Math.round(pie * 100) / 100;
+  document.getElementById("pulgada").value = Math.round(pulgada * 100) / 100;
+  document.getElementById("yarda").value = Math.round(yarda * 100) / 100;
 }
 
 function convertirGR(id, valor) {
