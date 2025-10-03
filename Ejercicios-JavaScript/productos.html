@@ -16,19 +16,47 @@
         <fieldset>
           <legend>Busqueda</legend>
           <label for="search">Buscar:</label>
-          <input type="text" id="search" name="search" />
+          <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Palabra..."
+            onchange="filtrarproductos()"
+          />
         </fieldset>
         <fieldset>
           <legend>Precios</legend>
           <p>
             <label for="minimo"> Minimo </label>
-            <input type="number" id="minimo" name="precio-min" min="0" />
+            <input
+              type="number"
+              id="minimo"
+              name="precio-min"
+              min="0"
+              onchange="filtrarproductos()"
+            />
           </p>
           <p>
             <label for="maximo">Maximo</label>
-            <input type="number" id="maximo" name="precio-max" min="0" />
+            <input
+              type="number"
+              id="maximo"
+              name="precio-max"
+              min="0"
+              onchange="filtrarproductos()"
+            />
           </p>
         </fieldset>
+
+        <fieldset>
+          <legend>Marca</legend>
+          <select id="marca" onchange="filtrarproductos()">
+            <option value="Todas">Todas</option>
+            <option value="Gran Marc">Gran Marc</option>
+            <option value="Daedo">Daedo</option>
+          </select>
+        </fieldset>
+
         <fieldset>
           <legend>Tipo de productos</legend>
           <p>
@@ -37,6 +65,7 @@
               id="protectores"
               name="tipo"
               value="protectores"
+              onchange="filtrarproductos()"
             />
             <label for="protectores">Protectores</label>
           </p>
@@ -46,11 +75,18 @@
               id="entrenamiento"
               name="tipo"
               value="entrenamiento"
+              onchange="filtrarproductos()"
             />
             <label for="entrenamiento">Entrenamiento</label>
           </p>
           <p>
-            <input type="checkbox" id="dobok" name="tipo" value="dobok" />
+            <input
+              type="checkbox"
+              id="dobok"
+              name="tipo"
+              value="dobok"
+              onchange="filtrarproductos()"
+            />
             <label for="dobok">Dobok</label>
           </p>
         </fieldset>
