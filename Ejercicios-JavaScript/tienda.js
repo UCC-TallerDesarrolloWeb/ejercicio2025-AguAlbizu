@@ -5,7 +5,7 @@ const productos = [
     categoria: "Protectores",
     marca: "Gran Marc",
     talle: ["1", "2", "3"],
-    precio: 35000,
+    precio: 35000.25,
     web: "https://www.granmarctiendaonline.com.ar/productos/cabezal-cerrado/",
     imagen: "cabezal-cerrado.webp",
   },
@@ -145,12 +145,12 @@ let vaciarcarrito = () => {
 
 let filtrarproductos = () => {
   let searchword = document.getElementById("search").value;
-  // let min = document.getElementById("min").value;
-  // let max = document.getElementById("max").value;
-  // let marca = document.getElementById("marca").value;
-  // let prot = document.getElementById("protectres").checked;
-  // let entr = document.getElementById("entrenamiento").checked;
-  // let dob = document.getElementById("dobok").checked;
+  let min = document.getElementById("minimo").value;
+  let max = document.getElementById("maximo").value;
+  let marca = document.getElementById("marca").value;
+  let prot = document.getElementById("protectores").checked;
+  let entr = document.getElementById("entrenamiento").checked;
+  let dob = document.getElementById("dobok").checked;
 
   let newlista = productos;
 
@@ -161,5 +161,27 @@ let filtrarproductos = () => {
         prod.description.toLowerCase().includes(searchword.toLowerCase())
     );
   }
+
+  if (min) {
+    newlista = newlista.filter((prod) => prod.precio >= min);
+  }
+
+  if (max) {
+    newlista = newlista.filter((prod) => prod.precio >= max);
+  }
+
+  if (marca !== "Todas") {
+    newlista = newlista.filter((prod) => prod.marca === marca);
+  }
+
+  let category = [];
+  prot ? category.push("Protectores") : "";
+  entr ? category.push("Entrenamiento") : "";
+  dob ? category.push("Dobok") : "";
+
+  if (category.length > 0) {
+    newlista = newlista.filter((prod) => category.includes(prod.categoria));
+  }
+
   cargarproductos(newlista);
 };
