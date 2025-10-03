@@ -70,7 +70,7 @@ let cargarproductos = () => {
         <img src="images/${elemento.imagen}" alt="${elemento.nombre}" />
         <h3>${elemento.nombre}</h3>
         <p>${elemento.precio}</p>
-        <button type="button" onclick="mostrarModal()">
+        <button type="button" onclick="mostrarModal(${id})">
           Ver detalle del producto
         </button>
       </div>`;
@@ -79,7 +79,10 @@ let cargarproductos = () => {
   document.getElementById("mostrar-catalogo").innerHTML = contenido;
 };
 
-let mostrarModal = () => {
+let mostrarModal = (id) => {
+  document.getElementById("titulo-producto").innerText = productos[id].nombre;
+  document.getElementById("descripcion-producto").innerText =
+    productos[id].description;
   document.getElementById("modal").style.display = "block";
 };
 
