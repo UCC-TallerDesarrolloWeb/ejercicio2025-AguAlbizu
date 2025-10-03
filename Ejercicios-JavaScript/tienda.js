@@ -107,20 +107,36 @@ let cerrarModal = () => {
 };
 
 let cargarcarrito = () => {
-  let carritolist = localStorage.getItem("carrito");
-
+  let carritolist = JSON.parse(localStorage.getItem("carrito"));
   let contenido = "";
+  let total = 0;
 
   if (carritolist == null) {
     contenido = "<div> Su carrito esta vacio.</div>";
   } else {
-    carritolist = JSON.parse(carritolist);
-    carritolist.forEach((num, id) => {
-      contenido += /*html*/ `<div>
-      <h3>${productos[num].nombre}</h3>
-      <p>${formatprecio(productos[num].precio)}</p>
-      <button type="button" onclick="eliminarproducto(${id})">Eliminar producto</div>`;
+    const listprod = [];
+    const listcant = [];
+
+    carritolist.forEach((num) => {
+      if (!listprod.includes(num)) {
+        listprod.push(num);
+        listcant.push(1);
+      } else {
+        const index = listprod.indexOf(num);
+        listcant[index] += 1;
+      }
     });
+
+    listprod.forEach((num, id) => {
+      const element = productos[num];
+      contenido += /*html*/ `<div>
+      <h3>${element.nombre}</h3>
+      <p>${formatprecio(element.precio)}</p>
+      <p>Cantidad: ${listcant[id]}</p>
+      <button type="button" onclick="eliminarproducto(${id})">Eliminar producto</div>`;
+      total += element.precio * listcant[id];
+    });
+    contenido += `Total: ${total}`;
     contenido += /*html*/ `<button type="button" onclick="vaciarcarrito()">Vaciar Carrito</button>`;
   }
   document.getElementById("mostrar-carrito").innerHTML = contenido;
