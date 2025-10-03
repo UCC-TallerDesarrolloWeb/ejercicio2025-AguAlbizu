@@ -3,9 +3,9 @@
   <head>
     <title>Catalogo de productos</title>
     <link href="catalogo.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="funciones.js"></script>
+    <script type="text/javascript" src="tienda.js"></script>
   </head>
-  <body class="grid-container">
+  <body class="grid-container" onload="cargarproductos()">
     <header class="item1">Catalogo de productos</header>
     <nav class="item2">
       <a href="productos.html">Catalogo de productos</a>
@@ -56,43 +56,15 @@
         </fieldset>
       </form>
     </aside>
-    <main class="item4">
-      <dialog id="modal">
-        <h2>Detalle del producto</h2>
-        <h3>Cabezal cerrado</h3>
-        <p>
-          Cabezal de Sparring: Disponible del talle 1 al 3. Color rojo y azul.
-        </p>
-        <button type="button" onclick="cerrarModal()">Cerrar</button>
-      </dialog>
-      <div>
-        <img src="images/cabezal-cerrado.webp" alt="Cabezal cerrado" />
-        <h3>Cabezal Cerrado</h3>
-        <button type="button" onclick="mostrarModal()">
-          Ver detalle del producto
-        </button>
-      </div>
-      <div>
-        <img src="images/foco-con-dedos.webp" alt="Foco con dedos" />
-        <h3>Foco con dedo</h3>
-      </div>
-      <div>
-        <img src="images/protectores-manos.webp" alt="Portectores Manos" />
-        <h3>Protectores de manos</h3>
-      </div>
-      <div>
-        <img src="images/protectores-pie.webp" alt="Protectores Pie" />
-        <h3>Protectores de pie</h3>
-      </div>
-      <div>
-        <img src="images/dobok.webp" alt="Dobok" />
-        <h3>Dobok</h3>
-      </div>
-      <div>
-        <img src="images/escudo-potencia.webp" alt="Escudo de potencia" />
-        <h3>Escudo de potencia</h3>
-      </div>
-    </main>
+    <dialog id="modal">
+      <h2>Detalle del producto</h2>
+      <h3>Cabezal cerrado</h3>
+      <p>
+        Cabezal de Sparring: Disponible del talle 1 al 3. Color rojo y azul.
+      </p>
+      <button type="button" onclick="cerrarModal()">Cerrar</button>
+    </dialog>
+    <main class="item4" id="mostrar-catalogo"></main>
     <footer class="item5">Contacto</footer>
   </body>
 </html>

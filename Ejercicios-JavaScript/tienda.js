@@ -58,6 +58,31 @@ const productos = [
     talle: ["XXS", "XS", "S", "M", "L", "XL"],
     precio: 35000,
     web: "https://www.daedo.com/collections/collection-itf-gloves/products/pritf-2022",
-    imagen: "protectores-manos.webp",
+    imagen: "protectores-pie.webp",
   },
 ];
+
+let cargarproductos = () => {
+  let contenido = "";
+
+  productos.forEach((elemento, id) => {
+    contenido += /*html*/ `<div>
+        <img src="images/${elemento.imagen}" alt="${elemento.nombre}" />
+        <h3>${elemento.nombre}</h3>
+        <p>${elemento.precio}</p>
+        <button type="button" onclick="mostrarModal()">
+          Ver detalle del producto
+        </button>
+      </div>`;
+  });
+
+  document.getElementById("mostrar-catalogo").innerHTML = contenido;
+};
+
+let mostrarModal = () => {
+  document.getElementById("modal").style.display = "block";
+};
+
+let cerrarModal = () => {
+  document.getElementById("modal").style.display = "none";
+};
