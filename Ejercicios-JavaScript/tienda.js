@@ -69,7 +69,7 @@ let cargarproductos = (prod = productos) => {
     contenido += /*html*/ `<div>
         <img src="images/${elemento.imagen}" alt="${elemento.nombre}" />
         <h3>${elemento.nombre}</h3>
-        <p>${elemento.precio}</p>
+        <p>${formatprecio(elemento.precio)}</p>
         <button type="button" onclick="mostrarModal(${id})">
           Ver detalle del producto
         </button>
@@ -92,6 +92,7 @@ let agregaralcarrito = (id) => {
   carritolist.push(id);
   console.log(carritolist);
   localStorage.setItem("carrito", JSON.stringify(carritolist));
+  contarprod();
 };
 
 let mostrarModal = (id) => {
@@ -117,7 +118,7 @@ let cargarcarrito = () => {
     carritolist.forEach((num, id) => {
       contenido += /*html*/ `<div>
       <h3>${productos[num].nombre}</h3>
-      <p>${productos[num].precio}</p>
+      <p>${formatprecio(productos[num].precio)}</p>
       <button type="button" onclick="eliminarproducto(${id})">Eliminar producto</div>`;
     });
     contenido += /*html*/ `<button type="button" onclick="vaciarcarrito()">Vaciar Carrito</button>`;
@@ -135,11 +136,13 @@ let eliminarproducto = (id) => {
   } else {
     localStorage.removeItem("carrito");
   }
+  contarprod();
   window.location.reload();
 };
 
 let vaciarcarrito = () => {
   localStorage.removeItem("carrito");
+  contarprod();
   window.location.reload();
 };
 
@@ -184,4 +187,19 @@ let filtrarproductos = () => {
   }
 
   cargarproductos(newlista);
+};
+
+let formatprecio = (precio) => {
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  }).format(precio);
+};
+
+let contarprod = () => {
+  const getcart = JSON.parse(localStorage.getItem("carrito"));
+
+  if (getcart != null) {
+    document.getElementById("cant-prod").innerText = getcart.length;
+  }
 };
