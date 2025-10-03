@@ -219,3 +219,38 @@ let contarprod = () => {
     document.getElementById("cant-prod").innerText = getcart.length;
   }
 };
+
+let ordercatalogo = () => {
+  const opt = document.getElementById("order").value;
+  let newprod;
+
+  switch (opt) {
+    case "menor":
+      newprod = productos.sort((a, b) => a.precio - b.precio);
+      break;
+    case "mayor":
+      newprod = productos.sort((a, b) => b.precio - a.precio);
+      break;
+    case "a-z":
+      newprod = productos.sort((a, b) => {
+        if (a.nombre.toUpperCase() < b.nombre.toUpperCase()) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+      break;
+    case "z-a":
+      newprod = productos.sort((a, b) => {
+        if (a.nombre.toUpperCase() > b.nombre.toUpperCase()) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+      break;
+    default:
+      newprod = productos.sort((a, b) => a.precio - b.precio);
+  }
+  cargarproductos(newprod);
+};
