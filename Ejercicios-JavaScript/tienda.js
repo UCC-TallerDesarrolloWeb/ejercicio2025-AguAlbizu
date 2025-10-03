@@ -73,10 +73,25 @@ let cargarproductos = () => {
         <button type="button" onclick="mostrarModal(${id})">
           Ver detalle del producto
         </button>
+        <button type="button" onclick="agregaralcarrito(${id})">
+        Agregar al carrito
+        </button>
       </div>`;
   });
 
   document.getElementById("mostrar-catalogo").innerHTML = contenido;
+};
+
+let agregaralcarrito = (id) => {
+  let carritolist = localStorage.getItem("carrito");
+  if (carritolist == null) {
+    carritolist = [];
+  } else {
+    carritolist = JSON.parse(carritolist);
+  }
+  carritolist.push(id);
+  console.log(carritolist);
+  localStorage.setItem("carrito", JSON.stringify(carritolist));
 };
 
 let mostrarModal = (id) => {
@@ -88,4 +103,42 @@ let mostrarModal = (id) => {
 
 let cerrarModal = () => {
   document.getElementById("modal").style.display = "none";
+};
+
+let cargarcarrito = () => {
+  let carritolist = localStorage.getItem("carrito");
+
+  let contenido = "";
+
+  if (carritolist == null) {
+    contenido = "<div> Su carrito esta vacio.</div>";
+  } else {
+    carritolist = JSON.parse(carritolist);
+    carritolist.forEach((num, id) => {
+      contenido += /*html*/ `<div>
+      <h3>${productos[num].nombre}</h3>
+      <p>${productos[num].precio}</p>
+      <button type="button" onclick="eliminarproducto(${id})">Eliminar producto</div>`;
+    });
+    contenido += /*html*/ `<button type="button" onclick="vaciarcarrito()">Vaciar Carrito</button>`;
+  }
+  document.getElementById("mostrar-carrito").innerHTML = contenido;
+};
+
+let eliminarproducto = (id) => {
+  let carritolist = localStorage.getItem("carrito");
+  carritolist = JSON.parse(carritolist);
+  carritolist.splice(id, 1);
+
+  if (carritolist.length > 0) {
+    localStorage.setItem("carrito", JSON.stringify(carritolist));
+  } else {
+    localStorage.removeItem("carrito");
+  }
+  window.location.reload();
+};
+
+let vaciarcarrito = () => {
+  localStorage.removeItem("carrito");
+  window.location.reload();
 };
