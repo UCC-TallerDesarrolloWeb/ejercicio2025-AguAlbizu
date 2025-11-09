@@ -1,9 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import './index.css';
+import "@styles/index.css";
 import Login from './login.jsx';
-import Layout from './layout.jsx';
+import Layout from '@Components/layout.jsx';
 import Home from './Home.jsx';
 import Activities from './activities.jsx';
 
